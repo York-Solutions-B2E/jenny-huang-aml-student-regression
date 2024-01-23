@@ -1,4 +1,5 @@
 import pandas as pd 
+import numpy as np
 from sklearn.metrics import mutual_info_score, mean_absolute_percentage_error, mean_squared_error, r2_score, mean_absolute_error
 from sklearn.feature_selection import mutual_info_regression, SelectKBest, SelectFromModel
 from sklearn.model_selection import GridSearchCV
@@ -7,7 +8,7 @@ from sklearn.model_selection import GridSearchCV
 #run a model and get evaluation metrics
 def get_model_stats (model, x_train, x_test, y_train, y_test): 
     model.fit(x_train, y_train)
-    pred = model.predict(x_test)
+    pred = np.round(model.predict(x_test))
     r2 = r2_score(y_test, pred)
     mse = mean_squared_error(y_test, pred)
     #a proxy for percent error- need to fix
